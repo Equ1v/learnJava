@@ -1,21 +1,21 @@
 package com.equiv.java;
 
 import org.hamcrest.collection.IsCollectionWithSize;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest
+class AppTest
 {
     @Test
     @DisplayName("Checking ArrayList")
@@ -71,5 +71,79 @@ public class AppTest
         assertThat(linkedList, IsCollectionWithSize.<String>hasSize(5));
         List<String> cutLinkedList = linkedList.subList(2,5);
         assertThat(cutLinkedList.size(), is(3));
+    }
+
+    @Test
+    @DisplayName("Checking HashSet")
+    void testForHashSet() {
+        Set<String> hashSet = new HashSet<String>();
+        Set<String> additionalHashSet = new HashSet<String>();
+        hashSet.add("a");
+        hashSet.add("b");
+        hashSet.add("c");
+
+        additionalHashSet.add("c");
+        additionalHashSet.add("b");
+        additionalHashSet.add("d");
+        additionalHashSet.add("e");
+
+        assertThat(hashSet.size(), is(3));
+        assertThat(hashSet, hasItem("b"));
+        hashSet.add("b");
+        assertThat(hashSet, IsCollectionWithSize.<String>hasSize(3));
+        hashSet.addAll(additionalHashSet);
+        assertThat(hashSet.size(), is(5));
+        assertThat(hashSet, containsInAnyOrder("a", "c", "b", "d", "e"));
+        hashSet.remove("c");
+        assertThat(hashSet.size(), is(4));
+        assertThat(hashSet, not(hasItem("c")));
+    }
+
+//    @Disabled
+    @Test
+    @DisplayName("Checking TreeSet")
+    void testForTreeSet() {
+        Set<Integer> treeSet = new TreeSet<Integer>();
+        treeSet.add(1);
+        treeSet.add(2);
+        treeSet.add(3);
+        treeSet.add(21);
+        treeSet.add(7);
+        treeSet.add(4);
+
+        assertThat(treeSet.size(), is(6));
+        assertThat(treeSet, contains(1,2,3,4,7,21));
+        treeSet.add(19);
+        assertThat(treeSet.size(), is(7));
+        assertThat(treeSet, contains(1,2,3,4,7,19,21));
+        treeSet.remove(2);
+        assertThat(treeSet.size(), is(6));
+        assertThat(treeSet, not(hasItem(2)));
+        assertThat(treeSet, contains(1,3,4,7,19,21));
+        treeSet.add(19);
+        assertThat(treeSet.size(), is(6));
+    }
+
+    @Test
+    @DisplayName("Checking LinkedHashSet")
+    void testForLinkedHashSet() {
+        Set<Integer> linkedHashSet = new LinkedHashSet<Integer>();
+        linkedHashSet.add(5);
+        linkedHashSet.add(1);
+        linkedHashSet.add(7);
+        linkedHashSet.add(-1);
+        linkedHashSet.add(0);
+
+        assertThat(linkedHashSet.size(), is(5));
+        assertThat(linkedHashSet, contains(5,1,7,-1,0));
+        linkedHashSet.add(7);
+        assertThat(linkedHashSet.size(), is(5));
+        assertThat(linkedHashSet, contains(5,1,7,-1,0));
+        linkedHashSet.add(20);
+        assertThat(linkedHashSet.size(), is(6));
+        assertThat(linkedHashSet, contains(5,1,7,-1,0,20));
+        linkedHashSet.remove(7);
+        assertThat(linkedHashSet.size(), is(5));
+        assertThat(linkedHashSet, contains(5,1,-1,0,20));
     }
 }
