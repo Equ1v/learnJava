@@ -33,16 +33,20 @@ class AppTest
         assertThat(arrayList, contains(1,2,3));
         assertThat(arrayList, not(hasItem(4)));
         arrayList.add(25);
-        assertThat(arrayList, hasItem(25));
+        assertThat(arrayList, contains(1,2,3,25));
+        assertThat(arrayList.size(), is(4));
         arrayList.add(1,98);
-        assertThat(arrayList.get(1), equalTo(98));
+        assertThat(arrayList, contains(1,98,2,3,25));
+        assertThat(arrayList.size(), is(5));
         arrayList.addAll(additionalArrayList);
-        assertThat(arrayList.containsAll(additionalArrayList), is(true));
+        assertThat(arrayList, contains(1,98,2,3,25,1,2,3,4,5));
         assertThat(arrayList.size(), is(10));
         arrayList.remove(new Integer(98));
-        assertThat(arrayList, not(hasItem(98)));
+        assertThat(arrayList, contains(1,2,3,25,1,2,3,4,5));
+        assertThat(arrayList.size(), is(9));
         List<Integer> cutArrayList = arrayList.subList(4,8);
         assertThat(cutArrayList, IsCollectionWithSize.<Integer>hasSize(4));
+        assertThat(cutArrayList, contains(1,2,3,4));
     }
 
     @Test
@@ -64,13 +68,13 @@ class AppTest
         assertThat(linkedList, not(hasItem("d")));
         linkedList.addAll(additionalLinkedList);
         assertThat(linkedList.size(), is(6));
-        assertThat(linkedList.containsAll(additionalLinkedList), is(true));
-        assertThat(linkedList, hasItem("e"));
+        assertThat(linkedList, contains("a", "b", "c", "d", "e", "f"));
         linkedList.remove("f");
-        assertThat(linkedList.containsAll(additionalLinkedList), is(false));
+        assertThat(linkedList, contains("a", "b", "c", "d", "e"));
         assertThat(linkedList, IsCollectionWithSize.<String>hasSize(5));
         List<String> cutLinkedList = linkedList.subList(2,5);
         assertThat(cutLinkedList.size(), is(3));
+        assertThat(cutLinkedList, contains("c", "d", "e"));
     }
 
     @Test
