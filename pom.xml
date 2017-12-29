@@ -24,8 +24,8 @@
       <version>2.19.1</version>
       <configuration>
         <includes>
-          <include>**/AppTest.java</include>
-          <include>**/QueueTests.java</include>
+          <include>**/lists/array/*.java</include>
+          <!--<include>**/QueueTests.java</include>-->
         </includes>
       </configuration>
       <dependencies>
