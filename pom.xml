@@ -27,6 +27,9 @@
           <include>**/lists/array/*.java</include>
           <!--<include>**/QueueTests.java</include>-->
         </includes>
+        <!--<excludes>-->
+          <!--<exclude>**/lists/array/AddDataIntoArrayList.java</exclude>-->
+        <!--</excludes>-->
       </configuration>
       <dependencies>
         <dependency>
