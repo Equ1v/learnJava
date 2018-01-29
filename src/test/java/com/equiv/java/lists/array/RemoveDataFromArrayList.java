@@ -8,7 +8,8 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.jupiter.api.Assertions.*;
@@ -328,5 +329,19 @@ class RemoveDataFromArrayList {
                 () -> assertEquals(initialSize, arrayList.size()),
                 () -> assertThat(arrayList, is(not(empty())))
         );
+    }
+
+    @Test
+    @DisplayName("Clear all elements from Array List")
+    void clearArrayList() {
+        //save origin size of arrayList
+        int initialSize = arrayList.size();
+        //clear all elements from arrayList
+        arrayList.clear();
+        //check that arrayList is now empty
+        assertThat(arrayList, is(empty()));
+        assertNotEquals(initialSize, arrayList.size());
+        assertEquals(0, arrayList.size());
+//        arrayList.forEach();
     }
 }
