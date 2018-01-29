@@ -194,39 +194,70 @@ class IterationOfArrayList {
     }
 
     @Test
-    @DisplayName("Iterating arrayList via ArrayList.listIterator")
-    void iteratingViaListIterator() {
+    @DisplayName("Iterating update last element in arrayList via ListIterator")
+    void updateLastElementInArrayList() {
         //save init size of arrayList
         int initSize = arrayList.size();
         //initialize listIterator for arrayList
         ListIterator<Person> iterator = arrayList.listIterator();
         //print all elements from arrayList on screen
         iterator.forEachRemaining(System.out::println);
-        //iterating via loop in forward order
-        System.out.println("before iterator " + arrayList);
-        while (iterator.hasNext()) {
-            if (iterator.next().getAge() > 50) {
-                iterator.remove();
-            }
+        //check that iterator.previous() is equal to last element in arrayList
+        assertEquals(arrayList.get(arrayList.size()-1), iterator.previous());
+        //save last element of arrayList
+        Person dummy = arrayList.get(arrayList.size()-1);
+        //changing last element in arrayList via iterator.set() and checking that size of arrayList was not changed and last element was changed
+        iterator.set(new Person(new SecureRandom().nextInt(100)));
+        assertNotEquals(dummy, iterator.previous());
+        assertEquals(initSize, arrayList.size());
+    }
+
+    @Test
+    @DisplayName("Update first element in arrayList via ListIterator")
+    void updateFirstElementInArrayList() {
+        //save init size of arrayList
+        int initSize = arrayList.size();
+        //initialize listIterator for arrayList
+        ListIterator<Person> listIterator = arrayList.listIterator();
+        //save first element of arrayList
+        Person firstElement = arrayList.get(0);
+        //check that iterator.next() is equal to first element
+        assertEquals(firstElement, listIterator.next());
+        //update first element via listIterator.set() and check that saved first element is not equal to arrayList.get(0)
+        listIterator.set(new Person(new SecureRandom().nextInt(100)));
+        assertNotEquals(firstElement, arrayList.get(0));
+    }
+
+    @Test
+    @DisplayName("Checking order of arrayList via ListIterator")
+    void checkingForwardAndBackwardOrder() {
+        //save init size of arrayList
+        int initSize = arrayList.size();
+        //initialize iterator for arrayList
+        ListIterator<Person> listIterator = arrayList.listIterator();
+        //initialize 2 additional arrayLists
+        List<Person> forwardOrderList = new ArrayList<>();
+        List<Person> backwardOrderList = new ArrayList<>();
+        //add elements from arrayList to forwardOrderList via ListIterator.next()
+        while (listIterator.hasNext()) {
+            forwardOrderList.add(listIterator.next());
         }
-        System.out.println("after iterator " + arrayList);
-        //check that size of arrayList was changed
-//        assertNotEquals(initSize, arrayList.size());
-        assertThat(arrayList, is(not(empty())));
-        //iterating via loop in backward order
-        while (iterator.hasPrevious()) {
-            //make some changes in arrayList
-            if (iterator.previous().getAge() < 10) {
-                iterator.previous();
-                iterator.remove();
-            }
+        //add elements from arrayList to backWardOrderList via ListIterator.previous()
+        while (listIterator.hasPrevious()) {
+            backwardOrderList.add(listIterator.previous());
         }
-        //add element as first element in arrayList via listIterator.add()
-        Person dummyPerson = arrayList.get(0);
-        //so add new Person into head of arrayList via ListIterator.add()
-        iterator.next();
-        iterator.add(new Person(new SecureRandom().nextInt(100)));
-        //check that head of list was changed
-        assertNotEquals(dummyPerson, arrayList.get(0));
+        //check that forwardOrderList is equal to arrayList and backwardOrderList is not equal to arrayList
+        assertAll("sdgfsdf",
+                () -> assertEquals(arrayList, forwardOrderList),
+                () -> assertNotEquals(arrayList, backwardOrderList),
+                () -> assertNotEquals(forwardOrderList, backwardOrderList)
+        );
+        //check that backwardOrderList is equal to forwardOrderList in desc order
+        Collections.reverse(backwardOrderList);
+        assertAll("fgdfgd",
+                () -> assertEquals(forwardOrderList, backwardOrderList),
+                () -> assertEquals(arrayList, backwardOrderList)
+        );
+        ArrayList<Integer> integerArrayList = new ArrayList<>();
     }
 }
