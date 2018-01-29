@@ -1,5 +1,6 @@
 package com.equiv.java.lists.array;
 
+import com.equiv.java.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,52 +19,52 @@ import static org.junit.jupiter.api.Assertions.*;
 class RemoveDataFromArrayList {
 
     //objects of this class will be used as elements of ArrayList
-    private class Person {
-        String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        int age;
-
-        public Person(String name, int age) {
-            this.name = name;
-            this.age = age;
-        }
-
-        Person(int age) {
-            this.age = age;
-            this.name = generateRandomName(7);
-        }
-
-        //used for generating random name, because ya ustal ya Myxo}|{yk
-        private String generateRandomName(int nameLength) {
-            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            if (nameLength <= 1) {
-                throw new IllegalArgumentException("Name could not be less than 2 characters");
-            }
-            StringBuilder sb = new StringBuilder();
-            while(nameLength >0) {
-                nameLength--;
-                char chr = characters.toCharArray()[new SecureRandom().nextInt(characters.length())];
-                sb.append(chr);
-            }
-            return sb.toString();
-        }
-
-        @Override
-        public String toString() {
-            return "Person{" +
-                    "name='" + name + '\'' +
-                    ", age=" + age +
-                    '}';
-        }
-    }
+//    private class Person {
+//        String name;
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//        public int getAge() {
+//            return age;
+//        }
+//
+//        int age;
+//
+//        public Person(String name, int age) {
+//            this.name = name;
+//            this.age = age;
+//        }
+//
+//        Person(int age) {
+//            this.age = age;
+//            this.name = generateRandomName(7);
+//        }
+//
+//        //used for generating random name, because ya ustal ya Myxo}|{yk
+//        private String generateRandomName(int nameLength) {
+//            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//            if (nameLength <= 1) {
+//                throw new IllegalArgumentException("Name could not be less than 2 characters");
+//            }
+//            StringBuilder sb = new StringBuilder();
+//            while(nameLength >0) {
+//                nameLength--;
+//                char chr = characters.toCharArray()[new SecureRandom().nextInt(characters.length())];
+//                sb.append(chr);
+//            }
+//            return sb.toString();
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return "Person{" +
+//                    "name='" + name + '\'' +
+//                    ", age=" + age +
+//                    '}';
+//        }
+//    }
 
     //ArrayList which will be tested
     private List<Person> arrayList = new ArrayList<>();
@@ -72,7 +73,7 @@ class RemoveDataFromArrayList {
     void beforeEach() {
         //initialize arrayList
         for (int i=0; i<10; i++) {
-            arrayList.add(new Person(new SecureRandom().nextInt(100)));
+            arrayList.add(new Person());
         }
     }
 
@@ -107,7 +108,7 @@ class RemoveDataFromArrayList {
         //check that initial size of ArrayList is 10
         assertEquals(10, arrayList.size());
         //add new Person object into random place in ArrayList
-        Person newOne = new Person(30);
+        Person newOne = new Person();
         arrayList.add(new SecureRandom().nextInt(arrayList.size()), newOne);
         //check that size of ArrayList was increased
         assertEquals(11, arrayList.size());
@@ -125,7 +126,7 @@ class RemoveDataFromArrayList {
         //check that initial size of ArrayList is 10
         assertEquals(10, arrayList.size());
         //initialize new example of Person class
-        Person newOne = new Person(86);
+        Person newOne = new Person();
         //Remove newOne element from ArrayList. Expect .remove() will return false and check that size of ArrayList was not changed
         assertAll("blabla",
                 () -> assertFalse(arrayList.remove(newOne)),
@@ -142,7 +143,7 @@ class RemoveDataFromArrayList {
         //initialize new ArrayList which will be added and removed from test list
         List<Person> additionOne = new ArrayList<>();
         for (int i=0; i<5; i++) {
-            additionOne.add(new Person(new SecureRandom().nextInt(100)));
+            additionOne.add(new Person());
         }
         //add additionOne collection into arrayList.
         // Save initial size of arrayList
@@ -171,11 +172,11 @@ class RemoveDataFromArrayList {
         //initialize new ArrayList which will be added to tested ArrayList
         List<Person> additionOne = new ArrayList<>();
         for(int i=0; i<5; i++) {
-            additionOne.add(new Person(new SecureRandom().nextInt(100)));
+            additionOne.add(new Person());
         }
         arrayList.addAll(additionOne);
         //add new element to additionOne arraylist to make it unmatch with tested arraylist
-        additionOne.add(new Person(new SecureRandom().nextInt(100)));
+        additionOne.add(new Person());
         //Remove collection additionOne from arrayList and expect that .removeAll will return true;
         assertAll("gfdgdfghgjhg",
                 () -> assertTrue(arrayList.removeAll(additionOne)),
@@ -192,7 +193,7 @@ class RemoveDataFromArrayList {
         //initialize new ArrayList which will be deleted from arrayList
         List<Person> additionOne = new ArrayList<>();
         for(int i=0; i<5; i++) {
-            additionOne.add(new Person(new SecureRandom().nextInt(100)));
+            additionOne.add(new Person());
         }
         //remove additionOne collection from arrayList. Expect that .removeAll() will return false
         assertAll("fgjfggeyubvd",
@@ -222,7 +223,7 @@ class RemoveDataFromArrayList {
         //save initial size of arrayList
         int initialSize = arrayList.size();
         //Make new Person element;
-        Person newPerson = new Person(new SecureRandom().nextInt(100));
+        Person newPerson = new Person();
         //add newPerson to arrayList twice on random place
         arrayList.add(new SecureRandom().nextInt(arrayList.size()), newPerson);
         arrayList.add(new SecureRandom().nextInt(arrayList.size()), newPerson);
@@ -244,7 +245,7 @@ class RemoveDataFromArrayList {
         //save initialSize of arrayList
         int initialSize = arrayList.size();
         //initialize new Person element
-        Person newPerson = new Person(10);
+        Person newPerson = new Person();
         arrayList.add(new SecureRandom().nextInt(arrayList.size()), newPerson);
         //remove all elements which age >=10. Expect that removeIf will return true;
         assertAll("fghhkfcd",
@@ -263,7 +264,7 @@ class RemoveDataFromArrayList {
         //initialize new ArrayList of Persons
         List<Person> additionList = new ArrayList<>();
         for(int i=0; i<5; i++) {
-            additionList.add(new Person(new SecureRandom().nextInt(100)));
+            additionList.add(new Person());
         }
         //add additionList to arrayList
         arrayList.addAll(additionList);
@@ -303,7 +304,7 @@ class RemoveDataFromArrayList {
         //initialize collection which will try to retain from arrayList
         List<Person> additionList = new ArrayList<>();
         for(int i=0; i<5; i++) {
-            additionList.add(new Person(new SecureRandom().nextInt(100)));
+            additionList.add(new Person());
         }
         //retain additionList from arrayList. Expect that retainAll will erase arrayList
         assertAll("dghgj",

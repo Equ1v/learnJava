@@ -30,6 +30,7 @@
         <excludes>
           <exclude>**/lists/array/AddDataIntoArrayList.java</exclude>
           <exclude>**/lists/array/RemoveDataFromArrayList.java</exclude>
+          <exclude>**/lists/array/IterationOfArrayList.java</exclude>
         </excludes>
       </configuration>
       <dependencies>

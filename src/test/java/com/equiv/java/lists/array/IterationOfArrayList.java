@@ -1,7 +1,7 @@
 package com.equiv.java.lists.array;
 
+import com.equiv.java.Person;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,53 +17,53 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Test suite for checking iteration of elements in ArrayList")
 class IterationOfArrayList {
 
-    //objects of this class will be used as elements of ArrayList
-    private class Person {
-        String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        int age;
-
-        public Person(String name, int age) {
-            this.name = name;
-            this.age = age;
-        }
-
-        Person(int age) {
-            this.age = age;
-            this.name = generateRandomName(7);
-        }
-
-        //used for generating random name, because ya ustal ya Myxo}|{yk
-        private String generateRandomName(int nameLength) {
-            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            if (nameLength <= 1) {
-                throw new IllegalArgumentException("Name could not be less than 2 characters");
-            }
-            StringBuilder sb = new StringBuilder();
-            while(nameLength >0) {
-                nameLength--;
-                char chr = characters.toCharArray()[new SecureRandom().nextInt(characters.length())];
-                sb.append(chr);
-            }
-            return sb.toString();
-        }
-
-        @Override
-        public String toString() {
-            return "Person{" +
-                    "name='" + name + '\'' +
-                    ", age=" + age +
-                    '}';
-        }
-    }
+//    //objects of this class will be used as elements of ArrayList
+//    private class Person {
+//        String name;
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//        public int getAge() {
+//            return age;
+//        }
+//
+//        int age;
+//
+//        public Person(String name, int age) {
+//            this.name = name;
+//            this.age = age;
+//        }
+//
+//        Person(int age) {
+//            this.age = age;
+//            this.name = generateRandomName(7);
+//        }
+//
+//        //used for generating random name, because ya ustal ya Myxo}|{yk
+//        private String generateRandomName(int nameLength) {
+//            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//            if (nameLength <= 1) {
+//                throw new IllegalArgumentException("Name could not be less than 2 characters");
+//            }
+//            StringBuilder sb = new StringBuilder();
+//            while (nameLength > 0) {
+//                nameLength--;
+//                char chr = characters.toCharArray()[new SecureRandom().nextInt(characters.length())];
+//                sb.append(chr);
+//            }
+//            return sb.toString();
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return "Person{" +
+//                    "name='" + name + '\'' +
+//                    ", age=" + age +
+//                    '}';
+//        }
+//    }
 
     //ArrayList which will be tested
     private List<Person> arrayList = new ArrayList<>();
@@ -71,8 +71,8 @@ class IterationOfArrayList {
     @BeforeEach
     void beforeEach() {
         //initialize arrayList
-        for (int i=0; i<10; i++) {
-            arrayList.add(new Person(new SecureRandom().nextInt(100)));
+        for (int i = 0; i < 10; i++) {
+            arrayList.add(new Person());
         }
     }
 
@@ -129,7 +129,7 @@ class IterationOfArrayList {
     void iteratingArrayListViaIterator() {
         //save origin size of arrayList
         int initSize = arrayList.size();
-        int i=0;
+        int i = 0;
         //initialize iterator for arrayList
         Iterator<Person> iterator = arrayList.iterator();
         while (iterator.hasNext()) {
@@ -203,11 +203,11 @@ class IterationOfArrayList {
         //print all elements from arrayList on screen
         iterator.forEachRemaining(System.out::println);
         //check that iterator.previous() is equal to last element in arrayList
-        assertEquals(arrayList.get(arrayList.size()-1), iterator.previous());
+        assertEquals(arrayList.get(arrayList.size() - 1), iterator.previous());
         //save last element of arrayList
-        Person dummy = arrayList.get(arrayList.size()-1);
+        Person dummy = arrayList.get(arrayList.size() - 1);
         //changing last element in arrayList via iterator.set() and checking that size of arrayList was not changed and last element was changed
-        iterator.set(new Person(new SecureRandom().nextInt(100)));
+        iterator.set(new Person());
         assertNotEquals(dummy, iterator.previous());
         assertEquals(initSize, arrayList.size());
     }
@@ -224,7 +224,7 @@ class IterationOfArrayList {
         //check that iterator.next() is equal to first element
         assertEquals(firstElement, listIterator.next());
         //update first element via listIterator.set() and check that saved first element is not equal to arrayList.get(0)
-        listIterator.set(new Person(new SecureRandom().nextInt(100)));
+        listIterator.set(new Person());
         assertNotEquals(firstElement, arrayList.get(0));
     }
 

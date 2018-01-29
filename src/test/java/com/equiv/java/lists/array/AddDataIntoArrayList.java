@@ -1,5 +1,6 @@
 package com.equiv.java.lists.array;
 
+import com.equiv.java.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,41 +17,41 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class AddDataIntoArrayList {
 
     //Objects of this class will be used for testing add functionality of ArrayList
-    private class Person {
-        String name;
-        int age;
-
-        Person(String name, int age) {
-            this.name = name;
-            this.age = age;
-        }
-
-        @Override
-        public String toString() {
-            return "Person{" +
-                    "name='" + name + '\'' +
-                    ", age=" + age +
-                    '}';
-        }
-    }
+//    private class Person {
+//        String name;
+//        int age;
+//
+//        Person(String name, int age) {
+//            this.name = name;
+//            this.age = age;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return "Person{" +
+//                    "name='" + name + '\'' +
+//                    ", age=" + age +
+//                    '}';
+//        }
+//    }
 
     private List<Person> arrayList = new ArrayList<>();
 
     //Make pre-req data
     @BeforeEach
     void beforeEach() {
-        arrayList.add(new Person("Vasya", 20));
-        arrayList.add(new Person("Petya", 19));
-        arrayList.add(new Person("Angelika", 22));
-        arrayList.add(new Person("Antosha", 92));
-        arrayList.add(new Person("Labuteni", 999));
+        arrayList.add(new Person());
+        arrayList.add(new Person());
+        arrayList.add(new Person());
+        arrayList.add(new Person());
+        arrayList.add(new Person());
     }
 
     @Test
     @DisplayName("Add new object to tale")
     void addNewPersonToTaleOfList() {
         //initialize new Person
-        Person newPerson = new Person("purum", -1);
+        Person newPerson = new Person();
         //check that default size of ArrayList is 5
         assertThat(arrayList.size(), is(5));
         //Add new element to tale and check that method add() returns true
@@ -78,7 +79,7 @@ class AddDataIntoArrayList {
     @DisplayName("Insert new Person in the middle of the existing list")
     void insertPersonIntoList() {
         //initialize new Person
-        Person newPerson = new Person("qwerty", 91);
+        Person newPerson = new Person();
         //Insert new Person into 2nd index
         arrayList.add(2, newPerson);
         //Check that list size was increased
@@ -91,7 +92,7 @@ class AddDataIntoArrayList {
     @DisplayName("Getting IndexOutOfBoundsException when add Person on nonexistent index")
     void getIndexOutOfBoundsException() {
         //initialize new Person
-        Person newPerson = new Person("erwewet", 123);
+        Person newPerson = new Person();
         //Trying to add Person to nonexistent index and IndexOutOfBoundsException expected
         assertThrows(IndexOutOfBoundsException.class, ()-> arrayList.add(7, newPerson));
         //expect that size of the list was not increased
@@ -107,9 +108,9 @@ class AddDataIntoArrayList {
         int currentListSize = arrayList.size();
         //initialize additional collection from which we will take elements
         List<Person> anotherList = new ArrayList<>();
-        anotherList.add(new Person("fgfdg", 12));
-        anotherList.add(new Person("fdghafg", 21));
-        anotherList.add(new Person("rtyer", 4));
+        anotherList.add(new Person());
+        anotherList.add(new Person());
+        anotherList.add(new Person());
         //expect that .addAll will return true;
         assertThat(arrayList.addAll(anotherList), is(true));
         //expect that size of arrayList is now 8
@@ -148,9 +149,9 @@ class AddDataIntoArrayList {
     void addCollectionToArrayListFromSomeIndex() {
         //initialize Collection with data
         List<Person> anotherList = new ArrayList<>();
-        anotherList.add(new Person("fgfdg", 12));
-        anotherList.add(new Person("fdghafg", 21));
-        anotherList.add(new Person("rtyer", 4));
+        anotherList.add(new Person());
+        anotherList.add(new Person());
+        anotherList.add(new Person());
         //save first size of ArrayList
         int firstArrayListSize = arrayList.size();
         //add some collection into arrayList from some index. Expect that addAll() will return true;
@@ -166,9 +167,9 @@ class AddDataIntoArrayList {
     void addCollectionToArrayListFromNonexistentIndex() {
         //initialize another collection
         List<Person> anotherList = new ArrayList<>();
-        anotherList.add(new Person("fgfdg", 12));
-        anotherList.add(new Person("fdghafg", 21));
-        anotherList.add(new Person("rtyer", 4));
+        anotherList.add(new Person());
+        anotherList.add(new Person());
+        anotherList.add(new Person());
         //save initial size of test ArrayList
         int size = arrayList.size();
         //trying to add collection to ArrayList from nonexistent index. Expect IndexOutOfBoundsException
