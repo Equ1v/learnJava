@@ -258,6 +258,25 @@ class IterationOfArrayList {
                 () -> assertEquals(forwardOrderList, backwardOrderList),
                 () -> assertEquals(arrayList, backwardOrderList)
         );
-        ArrayList<Integer> integerArrayList = new ArrayList<>();
+    }
+
+    @Test
+    @DisplayName("Iterating ArrayListList via listIterator with index")
+    void iterateArrayListViaListIteratorWithIndex() {
+        //save init size of arrayList
+        int initSize = arrayList.size();
+        //try to initialize new instance of Iterator with listIterator from non existent index
+        assertThrows(IndexOutOfBoundsException.class, () -> arrayList.listIterator(arrayList.size()+1));
+        //initialize new Iterator instance from arrayList.listIterator(int i)
+        Iterator<Person> iterator = arrayList.listIterator(new SecureRandom().nextInt(initSize));
+        //initialize empty instance of ArrayList
+        List<Person> personList = new ArrayList<>();
+        //put iterator's values into personList
+        iterator.forEachRemaining(personList::add);
+        //check that iterator is empty
+        assertFalse(iterator.hasNext());
+        //check that size of personList is not equal to size of arrayList
+        assertNotEquals(initSize, personList.size());
+        assertTrue(arrayList.containsAll(personList));
     }
 }
