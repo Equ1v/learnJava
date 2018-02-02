@@ -1,14 +1,12 @@
 package com.equiv.java.lists.array;
 
+import com.equiv.java.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Spliterator;
-
-import com.equiv.java.Person;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,6 +80,7 @@ public class SplitterOfArrayList {
     @DisplayName("Splitting ArrayList into 2 part when the size of ArrayList is even")
     void splittingArrayList() {
         //initialize second spliterator which split first spliterator
+//        System.out.println("Spliterator size = " + spliterator.trySplit().getExactSizeIfKnown());
         Spliterator<Person> spliterator1 = spliterator.trySplit();
         //check that size of those spliterators is equal
         assertEquals(spliterator1.getExactSizeIfKnown(), spliterator.getExactSizeIfKnown());
