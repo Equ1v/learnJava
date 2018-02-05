@@ -24,9 +24,15 @@
       <version>2.19.1</version>
       <configuration>
         <includes>
-          <include>**/AppTest.java</include>
-          <include>**/QueueTests.java</include>
+          <include>**/lists/array/*.java</include>
+          <include>**/lists/linked/*.java</include>
+          <!--<include>**/QueueTests.java</include>-->
         </includes>
+        <excludes>
+          <!--<exclude>**/lists/array/AddDataIntoArrayList.java</exclude>-->
+          <!--<exclude>**/lists/array/RemoveDataFromArrayList.java</exclude>-->
+          <!--<exclude>**/lists/array/IterationOfArrayList.java</exclude>-->
+        </excludes>
       </configuration>
       <dependencies>
         <dependency>
