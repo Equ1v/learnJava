@@ -16,25 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DisplayName("Add data into ArrayList Test Suite")
 class AddDataIntoArrayList {
 
-    //Objects of this class will be used for testing add functionality of ArrayList
-//    private class Person {
-//        String name;
-//        int age;
-//
-//        Person(String name, int age) {
-//            this.name = name;
-//            this.age = age;
-//        }
-//
-//        @Override
-//        public String toString() {
-//            return "Person{" +
-//                    "name='" + name + '\'' +
-//                    ", age=" + age +
-//                    '}';
-//        }
-//    }
-
     private List<Person> arrayList = new ArrayList<>();
 
     //Make pre-req data
