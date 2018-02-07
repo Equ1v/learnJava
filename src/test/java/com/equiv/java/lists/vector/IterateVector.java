@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class IterateVector {
 
-    private List<Person> vector = new Vector<>();
+    private Vector<Person> vector = new Vector<>();
 
     private int initSize;
 
@@ -210,5 +210,18 @@ class IterateVector {
         //check that size of personVector is not equal to size of vector
         assertNotEquals(initSize, personVector.size());
         assertTrue(vector.containsAll(personVector));
+    }
+
+    @Test
+    @DisplayName("Getting first and last element from Vector")
+    void firstAndLastElement() {
+        //initialize empty instance of Vector
+        Vector<Person> personVector = new Vector<>();
+        //get first and last element from personVector. Expect NoSuchElementException
+        assertThrows(NoSuchElementException.class, personVector::firstElement);
+        assertThrows(NoSuchElementException.class, personVector::lastElement);
+        //getting first and last element from vector
+        assertEquals(vector.get(0), vector.firstElement());
+        assertEquals(vector.get(vector.size()-1), vector.lastElement());
     }
 }

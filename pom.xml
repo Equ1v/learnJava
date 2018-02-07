@@ -24,9 +24,7 @@
       <version>2.19.1</version>
       <configuration>
         <includes>
-          <include>**/lists/array/*.java</include>
-          <include>**/lists/linked/*.java</include>
-          <include>**/lists/vector/*.java</include>
+          <include>**/lists/**/*.java</include>
           <!--<include>**/QueueTests.java</include>-->
         </includes>
         <excludes>

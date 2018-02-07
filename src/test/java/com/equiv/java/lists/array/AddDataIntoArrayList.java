@@ -10,8 +10,8 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("Add data into ArrayList Test Suite")
 class AddDataIntoArrayList {
@@ -166,5 +166,44 @@ class AddDataIntoArrayList {
         List<Person> nullList = null;
         //trying to add nullList to arrayList from some index. Expect NPE
         assertThrows(NullPointerException.class, () -> arrayList.addAll(0, nullList));
+    }
+
+    @Test
+    @DisplayName("Replace all elements in ArrayList")
+    void replaceElementViaReplaceAll() {
+        int initSize = arrayList.size();
+        List<Boolean> checkList = new ArrayList<>();
+        arrayList.replaceAll(x -> {
+            x.setName("WUSSSSSSUUUUP!");
+            return x;
+        });
+        //expect that size of arrayList was not changed and c
+        assertEquals(initSize, arrayList.size());
+        arrayList.forEach(x -> {
+            checkList.add(x.getName().equals("WUSSSSSSUUUUP!"));
+        });
+        //check that only WUSSSSSSUUUUP! in list
+        assertFalse(checkList.contains(false));
+    }
+
+    @Test
+    @DisplayName("Update some element in linkedList")
+    void updateElementsInLinkedList() {
+        int initSize = arrayList.size();
+        //initialize new Person instance
+        Person person = new Person();
+        //save some element from arrayList
+        Person indexPerson = arrayList.get(2);
+        //set person into 2 index in arrayList
+        assertAll("sdf",
+                () -> assertEquals(indexPerson, arrayList.set(2, person)),
+                () -> assertEquals(person, arrayList.get(2)),
+                () -> assertEquals(initSize, arrayList.size())
+        );
+        //set element on non exist index in arrayList
+        assertAll("fg",
+                () -> assertThrows(IndexOutOfBoundsException.class, () -> arrayList.set(100, person)),
+                () -> assertEquals(initSize, arrayList.size())
+        );
     }
 }

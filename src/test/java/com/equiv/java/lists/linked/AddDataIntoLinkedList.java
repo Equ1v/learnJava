@@ -178,4 +178,21 @@ class AddDataIntoLinkedList {
                 () -> assertEquals(initSize, linkedList.size())
         );
     }
+
+    @Test
+    @DisplayName("Replace all elements in LinkedList")
+    void replaceElementViaReplaceAll() {
+        List<Boolean> checkList = new ArrayList<>();
+        linkedList.replaceAll(x -> {
+            x.setName("WUSSSSSSUUUUP!");
+            return x;
+        });
+        //expect that size of linkedList was not changed and c
+        assertEquals(initSize, linkedList.size());
+        linkedList.forEach(x -> {
+            checkList.add(x.getName().equals("WUSSSSSSUUUUP!"));
+        });
+        //check that only WUSSSSSSUUUUP! in list
+        assertFalse(checkList.contains(false));
+    }
 }

@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RemoveDataFromVector {
 
-    private List<Person> vector = new Vector<>();
+    private Vector<Person> vector = new Vector<>();
 
     private int initSize;
 
@@ -152,5 +152,42 @@ class RemoveDataFromVector {
         assertTrue(vector.retainAll(emptyList));
         assertThat(vector, is(empty()));
         assertEquals(0, vector.size());
+    }
+
+    @Test
+    @DisplayName("Just remove element from Vector by index via removeElementAt()")
+    void removeElementFromVectorBySomeIndexViaRemoveElementAt() {
+        //save some index from vector
+        int index = new SecureRandom().nextInt(vector.size());
+        //save person from for index from vector
+        Person person = vector.elementAt(index);
+        //remove some element from vector by index and check that size of vector was changed and other stuff
+        vector.removeElementAt(index);
+        assertEquals(initSize, vector.size()+1);
+        assertFalse(vector.contains(person));
+        //save size;
+        initSize = vector.size();
+        //remove element from non exist index. Expect ArrayIndexOutOfBoundException and size of vector was not changed
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> vector.removeElementAt(vector.size()));
+        assertEquals(initSize, vector.size());
+    }
+
+    @Test
+    @DisplayName("Remove element from Vector by using object via removeElement")
+    void removeElementFromVectorByObjectViaRemoveElement() {
+        //initialize new instance of Person which will be added into vector
+        Person person = new Person();
+        //add person into vector
+        vector.add(new SecureRandom().nextInt(vector.size()), person);
+        //remove person from vector. It should returns true
+        assertTrue(vector.removeElement(person));
+        //and size of vector should be equal to origin
+        assertEquals(initSize, vector.size());
+        //person is not included into vector
+        assertFalse(vector.contains(person));
+        //remove non exist person from vector. It should returns false
+        assertFalse(vector.removeElement(person));
+        //and size of vector should not been changed
+        assertEquals(initSize, vector.size());
     }
 }
