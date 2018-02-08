@@ -25,7 +25,7 @@ class RemoveDataFromLinkedList {
 
     @BeforeEach
     void beforeEach() {
-        for (int i=0; i < new SecureRandom().nextInt(20); i++) {
+        for (int i=0; i < 10; i++) {
             linkedList.add(new Person());
         }
         initSize = linkedList.size();

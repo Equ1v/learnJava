@@ -46,8 +46,8 @@ class StackTestSuite {
         //initialize empty instance of Stack class
         Stack<Person> personStack = new Stack<>();
         //try to get element from empty stack. Expected EmptyStackException
-        assertThrows(EmptyStackException.class, () -> stack.peek());
-        assertThrows(EmptyStackException.class, () -> stack.pop());
+        assertThrows(EmptyStackException.class, () -> personStack.peek());
+        assertThrows(EmptyStackException.class, () -> personStack.pop());
         //get element from stack via peek()
         assertEquals(stack.lastElement(), stack.peek());
         //check that size of stack was not changed

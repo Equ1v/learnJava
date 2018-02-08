@@ -26,7 +26,7 @@ class RemoveDataFromVector {
 
     @BeforeEach
     void beforeEach() {
-        for (int i=0; i< new SecureRandom().nextInt(20); i++) {
+        for (int i=0; i < 10; i++) {
             vector.add(new Person());
         }
         initSize = vector.size();

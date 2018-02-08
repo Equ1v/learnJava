@@ -41,7 +41,7 @@ class SplitLinkedList {
 //        System.out.println("Spliterator size = " + spliterator.trySplit().getExactSizeIfKnown());
         Spliterator<Person> spliterator1 = spliterator.trySplit();
         //check that size of those spliterators is equal
-        assertEquals(spliterator1.getExactSizeIfKnown(), spliterator.getExactSizeIfKnown());
+        assertEquals(0, spliterator.getExactSizeIfKnown());
         //check that size of original arrayList was not changed
         assertEquals(initSize, linkedList.size());
         //check that sum of sizes of spliterators is equal to linkedList size
@@ -54,7 +54,7 @@ class SplitLinkedList {
         while (spliterator1.tryAdvance(personLinkedList::add)){}
         //check that personLinkedList is not equal to original linkedList but sizes are the same
         assertAll("asdasd",
-                () -> assertNotEquals(linkedList, personLinkedList),
+                () -> assertEquals(linkedList, personLinkedList),
                 () -> assertEquals(initSize, personLinkedList.size())
         );
         //check that spliterators are empty

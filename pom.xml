@@ -25,12 +25,12 @@
       <configuration>
         <includes>
           <include>**/lists/**/*.java</include>
-          <!--<include>**/QueueTests.java</include>-->
         </includes>
         <excludes>
-          <!--<exclude>**/lists/array/AddDataIntoArrayList.java</exclude>-->
-          <!--<exclude>**/lists/array/RemoveDataFromArrayList.java</exclude>-->
-          <!--<exclude>**/lists/array/IterationOfArrayList.java</exclude>-->
+          <!--<exclude>**/lists/array/*.java</exclude>-->
+          <!--<exclude>**/lists/linked/*.java</exclude>-->
+          <!--<exclude>**/lists/vector/*.java</exclude>-->
+          <!--<exclude>**/lists/stack/*.java</exclude>-->
         </excludes>
       </configuration>
       <dependencies>

@@ -24,7 +24,7 @@ class IterateVector {
 
     @BeforeEach
     void beforeEach() {
-        for(int i=0; i< new SecureRandom().nextInt(20); i++) {
+        for(int i=0; i < 10; i++) {
             vector.add(new Person());
         }
         initSize = vector.size();
@@ -200,7 +200,7 @@ class IterateVector {
         //try to initialize new instance of Iterator with listIterator from non existent index
         assertThrows(IndexOutOfBoundsException.class, () -> vector.listIterator(vector.size()+1));
         //initialize new Iterator instance from vector.listIterator(int i)
-        Iterator<Person> iterator = vector.listIterator(new SecureRandom().nextInt(initSize));
+        Iterator<Person> iterator = vector.listIterator(5);
         //initialize empty instance of Vector
         List<Person> personVector = new Vector<>();
         //put iterator's values into personVector

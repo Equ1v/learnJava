@@ -24,7 +24,7 @@ class AddDataIntoLinkedList {
 
     @BeforeEach
     void beforeEach() {
-        for (int i=0; i < new SecureRandom().nextInt(20); i++) {
+        for (int i=0; i < 10; i++) {
             linkedList.add(new Person());
         }
         this.initSize = linkedList.size();
@@ -97,13 +97,13 @@ class AddDataIntoLinkedList {
         //initialize collection where we will take elements to add to linkedList
         List<Person> personList = new ArrayList<>();
         //fill personList with elements
-        for (int i=0; i< new SecureRandom().nextInt(20); i++) {
+        for (int i=0; i< 5; i++) {
             personList.add(new Person());
         }
         //add elements from personList to tale of linkedList and check that all elements from personList are included in linkedList
         assertAll("dfdfg",
                 () -> assertTrue(linkedList.addAll(personList)),
-                () -> assertNotEquals(initSize, linkedList.size()),
+//                () -> assertNotEquals(initSize, linkedList.size()),
                 () -> assertEquals(linkedList.size(), initSize + personList.size()),
                 () -> assertTrue(linkedList.containsAll(personList))
         );

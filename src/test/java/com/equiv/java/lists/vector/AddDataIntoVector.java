@@ -22,7 +22,7 @@ class AddDataIntoVector {
 
     @BeforeEach
     void beforeEach() {
-        for (int i=0; i< new SecureRandom().nextInt(20); i++) {
+        for (int i=0; i < 10; i++) {
             vector.add(new Person());
         }
         initSize = vector.size();
@@ -218,7 +218,7 @@ class AddDataIntoVector {
         //insert element on non existent index
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> vector.insertElementAt(person, vector.size()+1));
         //check that size was not increased
-        assertEquals(initSize, vector.capacity());
+        assertEquals(initSize, vector.size());
     }
 
     @Test
@@ -227,7 +227,7 @@ class AddDataIntoVector {
         //initialize new instance of Person class
         Person person = new Person();
         //generate some index from vector
-        int index = new SecureRandom().nextInt(vector.size());
+        int index = 2;
         //check that person is not equal to element from vector on index
         assertNotEquals(person, vector.elementAt(index));
         //update element on index from vector
@@ -240,7 +240,7 @@ class AddDataIntoVector {
         //insert null on 0 index
         vector.setElementAt(null, 0);
         //check that size of vector was not changed and first element is null
-        assertEquals(initSize, vector.capacity());
+        assertEquals(initSize, vector.size());
         assertNull(vector.firstElement());
     }
 

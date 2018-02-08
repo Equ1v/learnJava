@@ -22,7 +22,7 @@ class IterateLinkedList {
 
     @BeforeEach
     void beforeEach() {
-        for (int i=0; i< new SecureRandom().nextInt(20); i++) {
+        for (int i=0; i < 10; i++) {
             linkedList.add(new Person());
         }
         initSize = linkedList.size();
@@ -113,7 +113,7 @@ class IterateLinkedList {
         //initialize iterator for linkedList
         Iterator<Person> iterator = linkedList.iterator();
         while (iterator.hasNext()) {
-            if (iterator.next().getAge() < 50) {
+            if (iterator.next().getAge()%2==0) {
                 iterator.remove();
             }
         }
@@ -198,14 +198,14 @@ class IterateLinkedList {
         //try to initialize new instance of Iterator with listIterator from non existent index
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.listIterator(linkedList.size()+1));
         //initialize new Iterator instance from linkedList.listIterator(int i)
-        Iterator<Person> iterator = linkedList.listIterator(new SecureRandom().nextInt(initSize));
+        Iterator<Person> iterator = linkedList.listIterator(5);
         //initialize empty instance of LinkedList
         List<Person> personList = new LinkedList<>();
         //put iterator's values into personList
         iterator.forEachRemaining(personList::add);
         //check that iterator is empty
         assertFalse(iterator.hasNext());
-        //check that size of personList is not equal to size of linkedList
+        //check that size of personList is equal to size of linkedList
         assertNotEquals(initSize, personList.size());
         assertTrue(linkedList.containsAll(personList));
     }
